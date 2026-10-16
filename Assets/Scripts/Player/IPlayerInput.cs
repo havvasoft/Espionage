@@ -17,5 +17,8 @@ namespace Espionage.Player
         bool JumpPressedThisFrame { get; }
 
         event Action InteractPerformed;
+
+        /// <summary>Raised once when the player presses the companion command button.</summary>
+        event Action CommandPerformed;
     }
 }

@@ -3,14 +3,19 @@ using UnityEngine;
 
 namespace Espionage.Gameplay
 {
-    /// <summary>Lets the companion walk to a <see cref="LaserBarrier"/>'s control panel and switch the laser off.</summary>
-    public sealed class LaserCompanionTarget : MonoBehaviour, ICompanionTarget
+    /// <summary>
+    /// Lets the companion walk to a <see cref="LaserBarrier"/>'s control panel and switch the laser off.
+    /// The player can only give the order while standing inside the command zone.
+    /// </summary>
+    public sealed class LaserCompanionTarget : MonoBehaviour, ICompanionTarget, IGatedCompanionTarget
     {
         [SerializeField] LaserBarrier barrier;
         [Tooltip("Where the companion stands to work on the laser.")]
         [SerializeField] Transform approachPoint;
         [Tooltip("What the companion faces; usually the control panel.")]
         [SerializeField] Transform focusPoint;
+        [Tooltip("The player must be inside this zone to give the order. Leave empty to allow it from anywhere.")]
+        [SerializeField] CommandZone commandZone;
         [SerializeField] float arrivalRadius = 0.6f;
         [SerializeField] float interactDuration = 2f;
 
@@ -20,6 +25,7 @@ namespace Espionage.Gameplay
         public Transform FocusPoint => focusPoint != null ? focusPoint : approachPoint;
         public float ArrivalRadius => arrivalRadius;
         public float InteractDuration => interactDuration;
+        public bool IsCommandAllowed => commandZone == null || commandZone.ContainsPlayer;
 
         void Awake()
         {

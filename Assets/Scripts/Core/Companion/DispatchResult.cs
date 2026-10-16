@@ -6,6 +6,7 @@ namespace Espionage.Core
         NoTarget = 1,
         TargetUnavailable = 2,
         CompanionBusy = 3,
-        CompanionUnavailable = 4
+        CompanionUnavailable = 4,
+        OutOfRange = 5
     }
 }

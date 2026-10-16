@@ -62,16 +62,27 @@ namespace Espionage.Companion
 
             ICompanionTarget match = null;
             bool foundType = false;
+            bool outOfRange = false;
             foreach (var target in targets)
             {
                 if (target.Type != type) continue;
                 foundType = true;
                 if (!target.IsAvailable) continue;
+                if (target is IGatedCompanionTarget gated && !gated.IsCommandAllowed)
+                {
+                    outOfRange = true;
+                    continue;
+                }
+
                 match = target;
                 break;
             }
 
-            if (match == null) return foundType ? DispatchResult.TargetUnavailable : DispatchResult.NoTarget;
+            if (match == null)
+            {
+                if (outOfRange) return DispatchResult.OutOfRange;
+                return foundType ? DispatchResult.TargetUnavailable : DispatchResult.NoTarget;
+            }
 
             return companion.TryIssue(new CompanionCommand(type, match))
                 ? DispatchResult.Accepted

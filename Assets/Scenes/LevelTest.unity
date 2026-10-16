@@ -918,6 +918,72 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298639711}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &310006973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310006974}
+  - component: {fileID: 310006976}
+  - component: {fileID: 310006975}
+  m_Layer: 0
+  m_Name: LaserCommandZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &310006974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310006973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 17.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1492762364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &310006975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310006973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96eca474553cf5439a12e28ec57e2a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Espionage.Gameplay::Espionage.Gameplay.CommandZone
+--- !u!65 &310006976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310006973}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.6, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &317933929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3827,6 +3893,8 @@ GameObject:
   - component: {fileID: 1196468022}
   - component: {fileID: 1196468021}
   - component: {fileID: 1196468029}
+  - component: {fileID: 1196468031}
+  - component: {fileID: 1196468030}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3975,6 +4043,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Espionage.Player::Espionage.Player.PlayerInteractionHud
   dotSize: 0.008
   fontSize: 0.035
+--- !u!114 &1196468030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196468020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc81e1ea018a694c99340c9ade2ddb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Espionage.Player::Espionage.Player.PlayerCommandHud
+  showSeconds: 3
+  fontSize: 0.03
+--- !u!114 &1196468031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196468020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9507b118ccd8344a0a83c98e49ca2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Espionage.Player::Espionage.Player.PlayerCompanionCommander
+  dispatcherComponent: {fileID: 1152608006}
+  commandType: 1
 --- !u!1 &1234400560
 GameObject:
   m_ObjectHideFlags: 0
@@ -4534,6 +4630,7 @@ Transform:
   - {fileID: 1545925483}
   - {fileID: 298639712}
   - {fileID: 612297504}
+  - {fileID: 310006974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1545925482
@@ -5859,6 +5956,7 @@ MonoBehaviour:
   barrier: {fileID: 2032289641}
   approachPoint: {fileID: 612297504}
   focusPoint: {fileID: 298639712}
+  commandZone: {fileID: 310006975}
   arrivalRadius: 0.6
   interactDuration: 2
 --- !u!1 &2040838130
