@@ -23,6 +23,8 @@ namespace Espionage.Companion
         [SerializeField] float acknowledgeDelay = 0.5f;
         [Tooltip("Seconds before a trip to the target is given up as unreachable.")]
         [SerializeField] float navigateTimeout = 30f;
+        [Tooltip("Seconds the companion waits for a clear line of sight to the target before giving up.")]
+        [SerializeField] float sightTimeout = 3f;
 
         readonly Dictionary<CompanionStateId, ICompanionState> states =
             new Dictionary<CompanionStateId, ICompanionState>();
@@ -43,6 +45,14 @@ namespace Espionage.Companion
         void Awake()
         {
             var navigator = GetComponent<CompanionNavigator>();
+            var perception = GetComponent<IPerception>();
+
+            if (perception == null)
+            {
+                Debug.LogError($"{name}: no IPerception on this object. Add CompanionPerception.", this);
+                enabled = false;
+                return;
+            }
 
             if (leader == null)
             {
@@ -53,8 +63,8 @@ namespace Espionage.Companion
 
             Register(new FollowState(navigator, leader, followDistance, stopDistance, repathInterval));
             Register(new ReceiveCommandState(this, navigator, acknowledgeDelay));
-            Register(new NavigateToTargetState(this, navigator, navigateTimeout));
-            Register(new InteractState(this, this, navigator));
+            Register(new NavigateToTargetState(this, navigator, perception, navigateTimeout));
+            Register(new InteractState(this, this, navigator, perception, sightTimeout));
             Register(new CompleteState(this));
         }
 

@@ -2966,6 +2966,7 @@ GameObject:
   - component: {fileID: 917363006}
   - component: {fileID: 917363005}
   - component: {fileID: 917363004}
+  - component: {fileID: 917363011}
   m_Layer: 0
   m_Name: Companion
   m_TagString: Untagged
@@ -2991,6 +2992,7 @@ MonoBehaviour:
   repathInterval: 0.25
   acknowledgeDelay: 0.5
   navigateTimeout: 30
+  sightTimeout: 3
 --- !u!114 &917363005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,6 +3123,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &917363011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917363003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2449f852d229a34b97710e6fa0ab2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Espionage.Companion.CompanionPerception
+  eyeOffset: {x: 0, y: 0.3, z: 0}
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  drawDebugRays: 1
 --- !u!1 &967013827
 GameObject:
   m_ObjectHideFlags: 0
@@ -5966,6 +5985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2086338768}
   - component: {fileID: 2086338769}
+  - component: {fileID: 2086338770}
   m_Layer: 0
   m_Name: Beams
   m_TagString: Untagged
@@ -6011,6 +6031,22 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffffi
+--- !u!208 &2086338770
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086338767}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2, y: 1.2, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.2, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
