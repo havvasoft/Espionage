@@ -54,6 +54,7 @@ namespace Espionage.Companion
             Register(new FollowState(navigator, leader, followDistance, stopDistance, repathInterval));
             Register(new ReceiveCommandState(this, navigator, acknowledgeDelay));
             Register(new NavigateToTargetState(this, navigator, navigateTimeout));
+            Register(new InteractState(this, this, navigator));
             Register(new CompleteState(this));
         }
 

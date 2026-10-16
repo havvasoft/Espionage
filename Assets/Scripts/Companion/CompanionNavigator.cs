@@ -53,6 +53,18 @@ namespace Espionage.Companion
             return agent.SetDestination(target);
         }
 
+        /// <summary>Turns toward <paramref name="point"/> on the horizontal plane. Returns true once facing it.</summary>
+        public bool FaceTowards(Vector3 point, float degreesPerSecond, float deltaTime)
+        {
+            Vector3 direction = point - transform.position;
+            direction.y = 0f;
+            if (direction.sqrMagnitude < 0.0001f) return true;
+
+            Quaternion goal = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, goal, degreesPerSecond * deltaTime);
+            return Quaternion.Angle(transform.rotation, goal) < 2f;
+        }
+
         public void Stop()
         {
             if (!IsReady) return;

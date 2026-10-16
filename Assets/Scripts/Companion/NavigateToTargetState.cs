@@ -59,10 +59,7 @@ namespace Espionage.Companion
             Vector3 offset = target.ApproachPoint.position - navigator.Position;
             offset.y = 0f;
             if (offset.magnitude <= target.ArrivalRadius)
-            {
-                // Arrival ends the command for now; the Interact step is added next.
-                context.Finish(CommandResult.Succeeded);
-            }
+                context.RequestState(CompanionStateId.Interact);
         }
 
         public void Exit() => navigator.Stop();
