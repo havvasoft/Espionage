@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OllamaSettings
   m_EditorClassIdentifier: Espionage.LLM::Espionage.LLM.OllamaSettings
   baseUrl: http://127.0.0.1:11434
-  model: llama3.2
-  timeoutSeconds: 30
-  temperature: 0.7
+  model: qwen2.5:3b
+  timeoutSeconds: 90
+  temperature: 0.3
   maxTokens: 256
