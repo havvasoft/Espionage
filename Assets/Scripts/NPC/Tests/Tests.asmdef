@@ -4,7 +4,9 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Espionage.NPC"
+        "Espionage.NPC",
+        "Espionage.LLM",
+        "Espionage.Core"
     ],
     "includePlatforms": [
         "Editor"
