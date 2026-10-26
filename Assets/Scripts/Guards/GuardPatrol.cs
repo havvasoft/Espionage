@@ -22,7 +22,15 @@ namespace Espionage.Guards
 
         public bool IsPatrolling => patrolling;
 
-        void Awake() => agent = GetComponent<NavMeshAgent>();
+        Vector3 startPosition;
+        Quaternion startRotation;
+
+        void Awake()
+        {
+            agent = GetComponent<NavMeshAgent>();
+            startPosition = transform.position;
+            startRotation = transform.rotation;
+        }
 
         void Start()
         {
@@ -86,6 +94,16 @@ namespace Espionage.Guards
                 agent.isStopped = true;
                 agent.ResetPath();
             }
+        }
+
+        /// <summary>Puts the guard back where it started and restarts the patrol from the first waypoint.</summary>
+        public void ResetToStart()
+        {
+            if (agent.isOnNavMesh) agent.Warp(startPosition);
+            transform.rotation = startRotation;
+            next = 0;
+            waiting = false;
+            Resume();
         }
 
         void GoToNext()

@@ -14,11 +14,25 @@ namespace Espionage.Player
         string message;
         float hideAt;
 
-        void Awake() => commander = GetComponent<PlayerCompanionCommander>();
+        PlayerRespawner respawner; // optional second message source
 
-        void OnEnable() => commander.MessageRaised += OnMessage;
+        void Awake()
+        {
+            commander = GetComponent<PlayerCompanionCommander>();
+            respawner = GetComponent<PlayerRespawner>();
+        }
 
-        void OnDisable() => commander.MessageRaised -= OnMessage;
+        void OnEnable()
+        {
+            commander.MessageRaised += OnMessage;
+            if (respawner != null) respawner.MessageRaised += OnMessage;
+        }
+
+        void OnDisable()
+        {
+            commander.MessageRaised -= OnMessage;
+            if (respawner != null) respawner.MessageRaised -= OnMessage;
+        }
 
         void OnMessage(string text)
         {

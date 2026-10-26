@@ -2,35 +2,39 @@ using UnityEngine;
 
 namespace Espionage.Guards
 {
-    /// <summary>Tints the guard red while it sees the target, so the player (and the audience) can tell.</summary>
-    [RequireComponent(typeof(GuardVision))]
+    /// <summary>Tints the guard from calm blue through yellow to red as its suspicion rises.</summary>
+    [RequireComponent(typeof(GuardDetector))]
     public sealed class GuardIndicator : MonoBehaviour
     {
         static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
         static readonly int Color_ = Shader.PropertyToID("_Color");
 
         [SerializeField] Color calmColor = new Color(0.25f, 0.45f, 0.9f);
+        [SerializeField] Color suspiciousColor = Color.yellow;
         [SerializeField] Color alertColor = Color.red;
 
-        IGuardVision vision;
+        IGuardSuspicion suspicion;
         Renderer[] renderers;
         MaterialPropertyBlock block;
-        bool? lastState;
+        float lastShown = -1f;
 
         void Awake()
         {
-            vision = GetComponent<IGuardVision>();
+            suspicion = GetComponent<IGuardSuspicion>();
             renderers = GetComponentsInChildren<Renderer>();
             block = new MaterialPropertyBlock();
         }
 
         void Update()
         {
-            bool seen = vision.CanSeeTarget;
-            if (lastState == seen) return;
-            lastState = seen;
+            float value = suspicion.Suspicion;
+            if (Mathf.Abs(value - lastShown) < 0.01f) return;
+            lastShown = value;
 
-            Color color = seen ? alertColor : calmColor;
+            Color color = value < 0.5f
+                ? Color.Lerp(calmColor, suspiciousColor, value / 0.5f)
+                : Color.Lerp(suspiciousColor, alertColor, (value - 0.5f) / 0.5f);
+
             foreach (var r in renderers)
             {
                 r.GetPropertyBlock(block);

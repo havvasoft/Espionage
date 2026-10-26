@@ -29,6 +29,7 @@ namespace Espionage.Guards
         Collider targetCollider;
 
         public bool CanSeeTarget { get; private set; }
+        public Vector3 LastSeenPosition { get; private set; }
 
         Vector3 Eye => transform.position + eyeOffset;
 
@@ -49,7 +50,11 @@ namespace Espionage.Guards
             }
         }
 
-        void Update() => CanSeeTarget = Evaluate();
+        void Update()
+        {
+            CanSeeTarget = Evaluate();
+            if (CanSeeTarget) LastSeenPosition = targetCollider.bounds.center;
+        }
 
         void OnDisable() => CanSeeTarget = false;
 

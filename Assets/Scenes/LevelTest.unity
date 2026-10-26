@@ -259,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 70246311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 1.1, z: 24}
+  m_LocalPosition: {x: -4.5, y: 1.1, z: 30}
   m_LocalScale: {x: 3, y: 2.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -928,7 +928,7 @@ Transform:
   m_GameObject: {fileID: 190349705}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 32}
+  m_LocalPosition: {x: -4, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2102,6 +2102,7 @@ GameObject:
   - component: {fileID: 395150022}
   - component: {fileID: 395150025}
   - component: {fileID: 395150024}
+  - component: {fileID: 395150026}
   m_Layer: 0
   m_Name: GuardPlaceholder_1
   m_TagString: Untagged
@@ -2234,6 +2235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Espionage.Guards.GuardIndicator
   calmColor: {r: 0.25, g: 0.45, b: 0.9, a: 1}
+  suspiciousColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   alertColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &395150025
 MonoBehaviour:
@@ -2254,6 +2256,23 @@ MonoBehaviour:
   sightMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &395150026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395150018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e0fc0065f8b9c44b6e48cfe6fdc28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Espionage.Guards.GuardDetector
+  alarmComponent: {fileID: 1487530859}
+  secondsToCatch: 1.5
+  secondsToCalm: 3
+  resumeDelay: 0.75
+  turnSpeed: 200
 --- !u!1 &397421039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2939,6 +2958,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1152608005}
+  - {fileID: 1487530858}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &656764724
@@ -3981,6 +4001,7 @@ GameObject:
   - component: {fileID: 888455106}
   - component: {fileID: 888455109}
   - component: {fileID: 888455108}
+  - component: {fileID: 888455110}
   m_Layer: 0
   m_Name: GuardPlaceholder_2
   m_TagString: Untagged
@@ -4113,6 +4134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Espionage.Guards.GuardIndicator
   calmColor: {r: 0.25, g: 0.45, b: 0.9, a: 1}
+  suspiciousColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   alertColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &888455109
 MonoBehaviour:
@@ -4133,6 +4155,23 @@ MonoBehaviour:
   sightMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &888455110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888455102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e0fc0065f8b9c44b6e48cfe6fdc28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Espionage.Guards.GuardDetector
+  alarmComponent: {fileID: 1487530859}
+  secondsToCatch: 1.5
+  secondsToCalm: 3
+  resumeDelay: 0.75
+  turnSpeed: 200
 --- !u!1 &913282784
 GameObject:
   m_ObjectHideFlags: 0
@@ -4158,7 +4197,7 @@ Transform:
   m_GameObject: {fileID: 913282784}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 28}
+  m_LocalPosition: {x: 5, y: 0, z: 28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5154,6 +5193,7 @@ GameObject:
   - component: {fileID: 1196468029}
   - component: {fileID: 1196468031}
   - component: {fileID: 1196468030}
+  - component: {fileID: 1196468032}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5330,6 +5370,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Espionage.Player::Espionage.Player.PlayerCompanionCommander
   dispatcherComponent: {fileID: 1152608006}
   commandType: 1
+--- !u!114 &1196468032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196468020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66ec3829cf67b34bbb3795323630aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Espionage.Player::Espionage.Player.PlayerRespawner
+  alarmComponent: {fileID: 1487530859}
+  checkpoint: {fileID: 2138444162}
 --- !u!1 &1234400560
 GameObject:
   m_ObjectHideFlags: 0
@@ -5669,7 +5723,7 @@ Transform:
   m_GameObject: {fileID: 1287856830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 32}
+  m_LocalPosition: {x: 4.5, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5963,6 +6017,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439918220}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1487530857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487530858}
+  - component: {fileID: 1487530859}
+  m_Layer: 0
+  m_Name: GuardAlarm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1487530858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487530857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 651838905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487530859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487530857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f9010e4b8b22046a52b02eb9a0263c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Espionage.Guards.GuardAlarm
+  cooldownSeconds: 1
 --- !u!1 &1489062265
 GameObject:
   m_ObjectHideFlags: 0
@@ -6166,6 +6265,7 @@ Transform:
   - {fileID: 612297504}
   - {fileID: 310006974}
   - {fileID: 619355116}
+  - {fileID: 2138444162}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541949676
@@ -6900,7 +7000,7 @@ Transform:
   m_GameObject: {fileID: 1649054263}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 1.1, z: 31}
+  m_LocalPosition: {x: -3, y: 1.1, z: 26}
   m_LocalScale: {x: 3, y: 2.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8523,7 +8623,7 @@ Transform:
   m_GameObject: {fileID: 2115193463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 1.1, z: 29.5}
+  m_LocalPosition: {x: 2, y: 1.1, z: 30}
   m_LocalScale: {x: 3, y: 2.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8719,6 +8819,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123522095}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2138444161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138444162}
+  m_Layer: 0
+  m_Name: CheckpointHall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2138444162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138444161}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1492762364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
