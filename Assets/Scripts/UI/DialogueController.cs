@@ -1,3 +1,4 @@
+using System;
 using Espionage.Core;
 using Espionage.LLM;
 using Espionage.NPC;
@@ -14,6 +15,8 @@ namespace Espionage.UI
 
         private NpcDialogue _dialogue;
         private MainframeAccessGate _gate;
+        private IPlayerControl _playerControl;
+        private IDisposable _inputLock;
         private bool _busy;
 
         private void Awake()
@@ -21,9 +24,22 @@ namespace Espionage.UI
             _dialogue = new NpcDialogue(settings.CreateClient());
         }
 
-        public void Bind(IObjectiveState objectives)
+        public void Bind(IObjectiveState objectives, IPlayerControl playerControl)
         {
-            _gate = new MainframeAccessGate(objectives);
+            _gate = objectives != null ? new MainframeAccessGate(objectives) : null;
+            _playerControl = playerControl;
+        }
+
+        public void Open()
+        {
+            view.gameObject.SetActive(true);
+            _inputLock ??= _playerControl?.RequestLock("NPC dialogue");
+        }
+
+        public void Close()
+        {
+            ReleaseLock();
+            view.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -34,6 +50,17 @@ namespace Espionage.UI
         private void OnDisable()
         {
             view.MessageSubmitted -= OnMessageSubmitted;
+        }
+
+        private void OnDestroy()
+        {
+            ReleaseLock();
+        }
+
+        private void ReleaseLock()
+        {
+            _inputLock?.Dispose();
+            _inputLock = null;
         }
 
         private async void OnMessageSubmitted(string playerText)
