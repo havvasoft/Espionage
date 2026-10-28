@@ -4242,6 +4242,8 @@ MonoBehaviour:
   followDistance: 2.5
   stopDistance: 1.8
   repathInterval: 0.25
+  catchUpDistance: 6
+  catchUpMultiplier: 2
   acknowledgeDelay: 0.5
   navigateTimeout: 30
   sightTimeout: 3

@@ -42,8 +42,6 @@ namespace Espionage.Player
 
         void OnGUI()
         {
-            if (string.IsNullOrEmpty(message) || Time.unscaledTime > hideAt) return;
-
             style ??= new GUIStyle(GUI.skin.label)
             {
                 alignment = TextAnchor.UpperCenter,
@@ -51,6 +49,15 @@ namespace Espionage.Player
             };
             int size = Mathf.Max(12, Mathf.RoundToInt(Screen.height * fontSize));
             style.fontSize = size;
+
+            if (commander.IsLookingAtCompanion)
+            {
+                GUI.Label(new Rect(Screen.width * 0.25f, Screen.height * 0.5f + size, Screen.width * 0.5f, size * 2f),
+                    "[C] Order companion", style);
+            }
+
+            if (string.IsNullOrEmpty(message) || Time.unscaledTime > hideAt) return;
+
             GUI.Label(new Rect(Screen.width * 0.25f, Screen.height * 0.08f, Screen.width * 0.5f, size * 2f),
                 message, style);
         }

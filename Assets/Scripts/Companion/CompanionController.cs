@@ -19,6 +19,10 @@ namespace Espionage.Companion
         [SerializeField] float followDistance = 2.5f;
         [SerializeField] float stopDistance = 1.8f;
         [SerializeField] float repathInterval = 0.25f;
+        [Tooltip("Walking distance (m) beyond which the companion speeds up to catch the player.")]
+        [SerializeField] float catchUpDistance = 6f;
+        [Tooltip("Speed multiplier while catching up. Keep it above the player's sprint speed / companion speed.")]
+        [SerializeField] float catchUpMultiplier = 2f;
         [Tooltip("Pause after receiving a command, before walking off.")]
         [SerializeField] float acknowledgeDelay = 0.5f;
         [Tooltip("Seconds before a trip to the target is given up as unreachable.")]
@@ -61,7 +65,8 @@ namespace Espionage.Companion
                 return;
             }
 
-            Register(new FollowState(navigator, leader, followDistance, stopDistance, repathInterval));
+            Register(new FollowState(navigator, leader, followDistance, stopDistance, repathInterval,
+                catchUpDistance, catchUpMultiplier));
             Register(new ReceiveCommandState(this, navigator, acknowledgeDelay));
             Register(new NavigateToTargetState(this, navigator, perception, navigateTimeout));
             Register(new InteractState(this, this, navigator, perception, sightTimeout));

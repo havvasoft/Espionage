@@ -11,6 +11,9 @@ namespace Espionage.Companion
         [SerializeField] float sampleDistance = 2f;
 
         NavMeshAgent agent;
+        NavMeshPath scratchPath;
+        float baseSpeed;
+        float baseStoppingDistance;
 
         public bool IsReady => agent != null && agent.isOnNavMesh;
         public Vector3 Position => transform.position;
@@ -22,6 +25,9 @@ namespace Espionage.Companion
         void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            scratchPath = new NavMeshPath();
+            baseSpeed = agent.speed;
+            baseStoppingDistance = agent.stoppingDistance;
         }
 
         void Start()
@@ -41,6 +47,46 @@ namespace Espionage.Companion
 
             onMesh = point;
             return false;
+        }
+
+        /// <summary>
+        /// Length of the walkable route to <paramref name="point"/> (not the straight-line distance, which a wall
+        /// can make very misleading). False if the agent is not ready or there is no complete route.
+        /// </summary>
+        public bool TryGetWalkingDistance(Vector3 point, out float length)
+        {
+            length = float.PositiveInfinity;
+            if (!IsReady || !TrySamplePosition(point, out var target)) return false;
+
+            if (!NavMesh.CalculatePath(agent.nextPosition, target, NavMesh.AllAreas, scratchPath)
+                || scratchPath.status != NavMeshPathStatus.PathComplete)
+                return false;
+
+            length = 0f;
+            var corners = scratchPath.corners;
+            for (int i = 1; i < corners.Length; i++)
+                length += Vector3.Distance(corners[i - 1], corners[i]);
+            return true;
+        }
+
+        /// <summary>Scales the walking speed (1 = the agent's normal speed).</summary>
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            if (agent != null) agent.speed = baseSpeed * multiplier;
+        }
+
+        /// <summary>How far from the destination the agent stops on its own.</summary>
+        public void SetStoppingDistance(float distance)
+        {
+            if (agent != null) agent.stoppingDistance = distance;
+        }
+
+        /// <summary>Back to the agent's original speed and stopping distance.</summary>
+        public void ResetMovementSettings()
+        {
+            if (agent == null) return;
+            agent.speed = baseSpeed;
+            agent.stoppingDistance = baseStoppingDistance;
         }
 
         /// <summary>Requests a path to <paramref name="point"/>. False if the agent is not ready or no path exists.</summary>

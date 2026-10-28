@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace Espionage.Companion
 {
-    /// <summary>Keeps the companion near the player by re-planning a NavMesh path at a fixed interval.</summary>
+    /// <summary>
+    /// Keeps the companion near the leader. Distances are measured along the NavMesh route, so a wall between
+    /// the two does not fool it, and it speeds up when it has fallen far behind.
+    /// </summary>
     public sealed class FollowState : ICompanionState
     {
         readonly CompanionNavigator navigator;
@@ -11,48 +14,61 @@ namespace Espionage.Companion
         readonly float followDistance;
         readonly float stopDistance;
         readonly float repathInterval;
+        readonly float catchUpDistance;
+        readonly float catchUpMultiplier;
 
         float repathTimer;
+        bool moving;
 
         public CompanionStateId Id => CompanionStateId.Follow;
 
-        public FollowState(CompanionNavigator navigator, Transform leader,
-            float followDistance, float stopDistance, float repathInterval)
+        public FollowState(CompanionNavigator navigator, Transform leader, float followDistance, float stopDistance,
+            float repathInterval, float catchUpDistance, float catchUpMultiplier)
         {
             this.navigator = navigator;
             this.leader = leader;
             this.followDistance = followDistance;
             this.stopDistance = stopDistance;
             this.repathInterval = repathInterval;
+            this.catchUpDistance = catchUpDistance;
+            this.catchUpMultiplier = catchUpMultiplier;
         }
 
-        public void Enter() => repathTimer = 0f;
+        public void Enter()
+        {
+            repathTimer = 0f;
+            moving = false;
+            navigator.SetStoppingDistance(stopDistance);
+        }
 
-        public void Exit() => navigator.Stop();
+        public void Exit()
+        {
+            navigator.Stop();
+            navigator.ResetMovementSettings();
+        }
 
         public void Tick(float deltaTime)
         {
             if (leader == null || !navigator.IsReady) return;
 
-            Vector3 toLeader = leader.position - navigator.Position;
-            toLeader.y = 0f;
-            float distance = toLeader.magnitude;
-
-            if (distance <= stopDistance)
-            {
-                navigator.Stop();
-                return;
-            }
-
-            if (distance < followDistance && navigator.HasPath) return;
-
             repathTimer -= deltaTime;
             if (repathTimer > 0f) return;
             repathTimer = repathInterval;
 
-            // Aim for a spot followDistance away from the leader, on the companion's side.
-            Vector3 standOff = leader.position - toLeader.normalized * followDistance;
-            navigator.TryMoveTo(standOff);
+            // No complete route to the leader (e.g. mid-jump): keep doing what we were doing.
+            if (!navigator.TryGetWalkingDistance(leader.position, out float walking)) return;
+
+            if (walking <= stopDistance)
+            {
+                if (moving) navigator.Stop();
+                moving = false;
+                return;
+            }
+
+            if (!moving && walking < followDistance) return;
+
+            moving = navigator.TryMoveTo(leader.position);
+            navigator.SetSpeedMultiplier(walking > catchUpDistance ? catchUpMultiplier : 1f);
         }
     }
 }
