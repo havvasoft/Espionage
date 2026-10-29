@@ -69,5 +69,25 @@ namespace Espionage.NPC.Tests
             Assert.IsFalse(result.Success);
             Assert.AreEqual(0, client.CallCount);
         }
+
+        [Test]
+        public void WarmUp_SendsExactlyOneRequest()
+        {
+            var client = new FakeLlmClient(LlmResult.Ok("{}", "fake"));
+            var dialogue = new NpcDialogue(client);
+
+            dialogue.WarmUpAsync().GetAwaiter().GetResult();
+
+            Assert.AreEqual(1, client.CallCount);
+        }
+
+        [Test]
+        public void WarmUp_WhenClientFails_DoesNotThrow()
+        {
+            var client = new FakeLlmClient(LlmResult.Fail(LlmErrorKind.Unavailable, "sunucu kapali"));
+            var dialogue = new NpcDialogue(client);
+
+            Assert.DoesNotThrow(() => dialogue.WarmUpAsync().GetAwaiter().GetResult());
+        }
     }
 }
