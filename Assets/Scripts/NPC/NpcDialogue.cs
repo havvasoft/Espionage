@@ -14,6 +14,11 @@ namespace Espionage.NPC
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
+        public async Task WarmUpAsync(CancellationToken cancellationToken = default)
+        {
+            await _client.SendAsync(LlmRequest.FromPrompts(null, "Merhaba"), cancellationToken);
+        }
+        
         public async Task<NpcParseResult> AskAsync(string playerText, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(playerText))

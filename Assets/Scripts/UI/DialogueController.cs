@@ -24,6 +24,11 @@ namespace Espionage.UI
             _dialogue = new NpcDialogue(settings.CreateClient());
         }
 
+        private async void Start()
+        {
+            await _dialogue.WarmUpAsync(destroyCancellationToken);
+        }
+
         public void Bind(IObjectiveState objectives, IPlayerControl playerControl)
         {
             _gate = objectives != null ? new MainframeAccessGate(objectives) : null;
