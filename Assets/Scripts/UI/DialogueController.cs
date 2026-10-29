@@ -92,7 +92,6 @@ namespace Espionage.UI
             }
 
             view.ShowReply(result.Reply.Reply);
-            Debug.Log($"NPC decision: {result.Reply.Decision}");
             _gate?.Apply(result);
         }
     }
