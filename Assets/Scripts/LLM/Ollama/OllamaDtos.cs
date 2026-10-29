@@ -12,6 +12,7 @@ namespace Espionage.LLM
         public List<OllamaMessage> messages = new List<OllamaMessage>();
         public bool stream;
         public OllamaOptions options = new OllamaOptions();
+        public string keep_alive = "30m";
     }
 
     /// <summary>Adds the "format" field. Kept separate because JsonUtility cannot omit null/empty fields.</summary>
