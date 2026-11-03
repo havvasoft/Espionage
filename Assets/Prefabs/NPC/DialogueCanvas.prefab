@@ -80,10 +80,10 @@ RectTransform:
   - {fileID: 6493180107177638125}
   m_Father: {fileID: 4543086845749929409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 555.5, y: -116.21875}
+  m_SizeDelta: {x: 1091, y: 56.432503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7873134953899631950
 CanvasRenderer:
@@ -362,10 +362,10 @@ RectTransform:
   - {fileID: 2295077566169454708}
   m_Father: {fileID: 4543086845749929409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 555.5, y: -221.10875}
+  m_SizeDelta: {x: 1091, y: 37.7825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4465730239889413866
 CanvasRenderer:
@@ -520,7 +520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4543086845749929409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -932,10 +932,10 @@ RectTransform:
   - {fileID: 1965792317790140235}
   m_Father: {fileID: 4543086845749929409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 555.5, y: -173.32625}
+  m_SizeDelta: {x: 1091, y: 37.7825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2433509738426253783
 CanvasRenderer:
@@ -1051,10 +1051,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4543086845749929409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 555.5, y: -44.00125}
+  m_SizeDelta: {x: 1091, y: 68.0025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4734648439648329815
 CanvasRenderer:
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Burada NPC cevab\u0131 g\xF6r\xFCnecek."
+  m_text: "Ana bilgisayar odas\u0131na girmek i\xE7in gerek\xE7eni s\xF6yle."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
