@@ -10,6 +10,7 @@ namespace Espionage.UI
         [SerializeField] private TMP_Text npcReplyText;
         [SerializeField] private TMP_InputField playerInput;
         [SerializeField] private Button sendButton;
+        [SerializeField] private Button closeButton;
 
         private const string ThinkingMessage = "Görevli düşünüyor";
         private const float DotInterval = 0.4f;
@@ -19,15 +20,18 @@ namespace Espionage.UI
         private int _dotCount;
 
         public event Action<string> MessageSubmitted;
+        public event Action CloseRequested;
 
         private void OnEnable()
         {
             sendButton.onClick.AddListener(OnSendClicked);
+            closeButton.onClick.AddListener(OnCloseClicked);
         }
 
         private void OnDisable()
         {
             sendButton.onClick.RemoveListener(OnSendClicked);
+            closeButton.onClick.RemoveListener(OnCloseClicked);
         }
 
         public void ShowReply(string text)
@@ -71,6 +75,11 @@ namespace Espionage.UI
 
             playerInput.text = string.Empty;
             MessageSubmitted?.Invoke(text);
+        }
+
+        private void OnCloseClicked()
+        {
+            CloseRequested?.Invoke();
         }
     }
 }
