@@ -50,11 +50,13 @@ namespace Espionage.UI
         private void OnEnable()
         {
             view.MessageSubmitted += OnMessageSubmitted;
+            view.CloseRequested += Close;
         }
 
         private void OnDisable()
         {
             view.MessageSubmitted -= OnMessageSubmitted;
+            view.CloseRequested -= Close;
         }
 
         private void OnDestroy()
