@@ -3222,6 +3222,7 @@ Transform:
   - {fileID: 1152608005}
   - {fileID: 1487530858}
   - {fileID: 1986670564}
+  - {fileID: 1930850541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &656764724
@@ -8420,6 +8421,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917862680}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1930850540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930850541}
+  - component: {fileID: 1930850542}
+  m_Layer: 0
+  m_Name: CompanionTestRunner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1930850541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930850540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 651838905}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1930850542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930850540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7d73d3acbee25418d41199f49c7043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Espionage.Testing.CompanionTestRunner
+  dispatcherComponent: {fileID: 1152608006}
+  companion: {fileID: 917363010}
+  player: {fileID: 1196468028}
+  playerStart: {fileID: 1370309673}
+  laser: {fileID: 2032289641}
+  startPoints:
+  - label: P1_R2_Gap
+    point: {fileID: 1185892662}
+    expectUnreachable: 0
+  - label: P2_R2_NW
+    point: {fileID: 1553734689}
+    expectUnreachable: 0
+  - label: P3_R2_SW
+    point: {fileID: 567976886}
+    expectUnreachable: 0
+  - label: P4_Panel_Near
+    point: {fileID: 316797672}
+    expectUnreachable: 0
+  - label: P5_R2_NE
+    point: {fileID: 693530594}
+    expectUnreachable: 0
+  - label: P6_R2_Center
+    point: {fileID: 775577663}
+    expectUnreachable: 0
+  - label: N1_Behind_Laser
+    point: {fileID: 538075974}
+    expectUnreachable: 1
+  trialsPerPoint: 5
+  trialTimeout: 45
+  settleSeconds: 0.75
+  timeScale: 1
 --- !u!1 &1935682501
 GameObject:
   m_ObjectHideFlags: 0
