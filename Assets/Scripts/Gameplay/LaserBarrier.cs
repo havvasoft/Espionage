@@ -25,6 +25,13 @@ namespace Espionage.Gameplay
                 Debug.LogError($"{name}: 'beams' is not assigned.", this);
         }
 
+        /// <summary>Switches the laser back on (used by repeatable tests). Does not undo the completed objective.</summary>
+        public void ResetBarrier()
+        {
+            IsActive = true;
+            if (beams != null) beams.SetActive(true);
+        }
+
         /// <summary>Returns false if the laser was already disabled.</summary>
         [ContextMenu("Disable (test)")]
         public bool Disable()
