@@ -1,0 +1,17 @@
+{
+    "name": "Espionage.NPC",
+    "rootNamespace": "Espionage.NPC",
+    "references": [
+        "GUID:fb26c88d8b9643ddda7a736d834d62b9",
+        "GUID:3211a461fd74bf94f91cd20fea52ad60"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

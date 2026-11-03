@@ -1,0 +1,16 @@
+{
+    "name": "Espionage.LLM",
+    "rootNamespace": "Espionage.LLM",
+    "references": [
+        "Espionage.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
