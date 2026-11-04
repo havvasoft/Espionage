@@ -1,0 +1,9 @@
+﻿point,kind,trials,passed,pass_rate_percent,avg_seconds,min_seconds,max_seconds
+P1_R2_Gap,normal,5,5,100,4.64,4.64,4.65
+P2_R2_NW,normal,5,5,100,5.33,5.33,5.33
+P3_R2_SW,normal,5,5,100,8.48,8.48,8.48
+P4_Panel_Near,normal,5,5,100,3.17,3.17,3.17
+P5_R2_NE,normal,5,5,100,4.63,4.63,4.65
+P6_R2_Center,normal,5,5,100,2.99,2.99,3.00
+N1_Behind_Laser,negative_control,5,5,100,5.51,5.51,5.51
+OVERALL,normal,30,30,100.0,4.87,,
