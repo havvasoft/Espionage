@@ -1,10 +1,14 @@
+using Espionage.Core;
 using UnityEngine;
 
 namespace Espionage.Player
 {
-    /// <summary>Shows the latest companion message near the top of the screen for a few seconds.</summary>
+    /// <summary>
+    /// Shows the latest message (companion, respawn, or from world objects through <see cref="IPlayerMessageSink"/>)
+    /// near the top of the screen for a few seconds.
+    /// </summary>
     [RequireComponent(typeof(PlayerCompanionCommander))]
-    public sealed class PlayerCommandHud : MonoBehaviour
+    public sealed class PlayerCommandHud : MonoBehaviour, IPlayerMessageSink
     {
         [SerializeField] float showSeconds = 3f;
         [SerializeField] float fontSize = 0.03f;
@@ -34,6 +38,8 @@ namespace Espionage.Player
             if (respawner != null) respawner.MessageRaised -= OnMessage;
         }
 
+        public void ShowMessage(string text) => OnMessage(text);
+
         void OnMessage(string text)
         {
             message = text;
@@ -58,7 +64,7 @@ namespace Espionage.Player
 
             if (string.IsNullOrEmpty(message) || Time.unscaledTime > hideAt) return;
 
-            GUI.Label(new Rect(Screen.width * 0.25f, Screen.height * 0.08f, Screen.width * 0.5f, size * 2f),
+            GUI.Label(new Rect(Screen.width * 0.2f, Screen.height * 0.08f, Screen.width * 0.6f, size * 3f),
                 message, style);
         }
     }

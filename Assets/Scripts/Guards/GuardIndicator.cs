@@ -21,8 +21,22 @@ namespace Espionage.Guards
         void Awake()
         {
             suspicion = GetComponent<IGuardSuspicion>();
-            renderers = GetComponentsInChildren<Renderer>();
+            renderers = FindTintRenderers();
             block = new MaterialPropertyBlock();
+        }
+
+        /// <summary>
+        /// Only parts whose name starts with "Tint" change colour, so a multi-part robot keeps its eyes and details.
+        /// A guard without such parts (e.g. a single capsule) is tinted as a whole.
+        /// </summary>
+        Renderer[] FindTintRenderers()
+        {
+            var all = GetComponentsInChildren<Renderer>();
+            var tinted = new System.Collections.Generic.List<Renderer>();
+            foreach (var r in all)
+                if (r.gameObject.name.StartsWith("Tint")) tinted.Add(r);
+
+            return tinted.Count > 0 ? tinted.ToArray() : all;
         }
 
         void Update()

@@ -1,0 +1,5 @@
+﻿point,kind,trials,passed,pass_rate_percent,avg_seconds,min_seconds,max_seconds
+Random_Region_R2,normal,14,14,100,4.93,3.20,8.04
+Random_Region_Corridor,normal,13,13,100,3.00,2.74,3.24
+Random_Region_R1,normal,13,13,100,7.22,6.49,8.28
+OVERALL,normal,40,40,100.0,5.05,,
